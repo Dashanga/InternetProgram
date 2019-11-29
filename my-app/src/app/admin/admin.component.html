@@ -1,1 +1,111 @@
 <h2 align="center">Админка видна только волшебникам</h2>
+
+
+<div class="content" role="main">
+    
+        
+                <table>
+                        <tr>
+                            <td>
+                                <p>ID</p>
+                            </td>
+                            <td>
+                                <p> Тип </p>
+                            </td>
+                            <td>
+                                <p> День </p>
+                            </td>
+                            <td>
+                                <p>Неделя </p>
+                            </td>
+                            <td>
+                                <p> Название </p>
+                            </td>
+                            <td>
+                                    <p> Пара </p>
+                                </td>
+                                <td>
+                                        <p> Факультет </p>
+                                    </td>
+                                    <td>
+                                            <p> Курс </p>
+                                        </td>
+                                        <td>
+                                        <p> Преподаватель </p>
+                                    </td>
+                        </tr>
+                        <tr *ngFor="let predmet of predmets">
+                            <td>
+                                <p> {{predmet["id"]}}</p>
+                            </td>
+                            <td>
+                                <p>{{predmet["tip"]}}</p>
+                            <td>
+                                <p> {{predmet["day"]}}</p>
+                            </td>
+                            <td>
+                                <p> {{predmet["week"]}}</p>
+                            </td>
+                            <td>
+                                <p> {{predmet["name"]}}</p>
+                            </td>
+                            <td>
+                                    <p> {{predmet["para"]}}</p>
+                                </td>
+                                <td>
+                                        <p> {{predmet["fakultet"]}}</p>
+                                    </td>
+                                    <td>
+                                            <p> {{predmet["kurs"]}}</p>
+                                        </td>
+                                        <td>
+                                            <p> {{predmet["teacher"]}}</p>
+                                        </td>
+                        </tr>
+                    </table> 
+
+
+<br>
+                    <form>
+                <div class="d7">
+
+                <p><b>Тип предмета: </b>
+                    <input type="text" size="20" name="tip" [(ngModel)]="tip">
+                </p>
+                <p><b>День: </b>
+                    <input type="text" size="20" name="day" [(ngModel)]="day">
+                </p>
+                <p><b>Неделя: </b>
+                    <input type="text" size="20" name="week" [(ngModel)]="week">
+                </p>
+
+            <p><b>Название предмета: </b>
+                <input type="text" size="20" name="name" [(ngModel)]="name">
+            </p>
+            <p><b>Пара: </b>
+                <input type="text" size="20" name="para" [(ngModel)]="para">
+            </p>
+            <p><b>Факультет: </b>
+                <input type="text" size="20" name="fakultet" [(ngModel)]="fakultet">
+            </p>
+            <p><b>Курс: </b>
+                <input type="text" size="20" name="kurs" [(ngModel)]="kurs">
+            </p> 
+            <p><b>Преподаватель: </b>
+                <input type="text" size="20" name="teacher" [(ngModel)]="teacher">
+            </p> 
+            
+
+            <a class="knopka" (click)="submit(tip, day, week, name, para, fakultet, kurs, teacher)">Добавить предмет</a>
+             <p><b>id изменяемого предмета: </b>
+                <input type="text" size="40" name="id" [(ngModel)]="id">
+            </p>
+            <button type="reset">Очистить все поля</button>
+             <a class="knopka" (click)="delete(id)" (click) = "update_list()">Удалить предмет</a>
+            <a class="knopka" (click)="update(tip, day, week, name, para, fakultet, kurs, teacher, id)" (click) = "update_list()">Редактировать предмет</a>
+            <a class="knopka" (click)="update_list()">Список всех предметов</a>
+        </div>
+    </form>
+    <br> 
+    
+</div>
