@@ -8,13 +8,22 @@ import { RaspisanieComponent } from './raspisanie/raspisanie.component';
 import { MainComponent } from './main/main.component';
 import { AdminComponent } from './admin/admin.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorisationComponent } from './authorisation/authorisation.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { AuthorisationService } from "./authorisation/authorisation.service";
+import { TokenInterceptor } from "./token.interceptor";
+
+
+import { AuthGuard } from './authorisation/authorisation.guard';
 
 const appRoutes: Routes = [
-{ path: 'main', component: MainComponent },
-{ path: 'raspisanie', component: RaspisanieComponent },
-{ path: 'admin', component: AdminComponent },
-{ path: '', redirectTo: '/main', pathMatch: 'full' }
+{ path: 'main', canActivate: [AuthGuard], component: MainComponent },
+{ path: 'raspisanie', canActivate: [AuthGuard], component: RaspisanieComponent },
+{ path: 'admin', canActivate: [AuthGuard], component: AdminComponent },
+{ path: 'registration', component: RegistrationComponent },
+{ path: 'authorisation', component: AuthorisationComponent },
+{ path: '', redirectTo: '/authorisation', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -22,7 +31,9 @@ declarations: [
 AppComponent,
 RaspisanieComponent,
 MainComponent,
-AdminComponent
+AdminComponent,
+AuthorisationComponent,
+RegistrationComponent
 ],
 imports: [
     HttpClientModule,
@@ -34,7 +45,11 @@ BrowserModule,
 AppRoutingModule,
 FormsModule,
 ],
-providers: [],
+providers: [
+    AuthorisationService, 
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    AuthGuard
+],
 bootstrap: [AppComponent]
 })
 

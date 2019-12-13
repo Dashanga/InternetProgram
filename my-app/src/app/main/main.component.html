@@ -24,5 +24,11 @@
       </p>
       <a routerLink="/admin">
         <br><br><br><br><br><br><br><br><br>
-      <h6 align="center" style="color: black">Перейти на админку</h6>
+      <h6 *ngIf = "isAdmin" align="center" style="color: black">Перейти на админку</h6>
       </a>
+
+      <a (click) = "logout()" routerLink="/authorisation">
+        <br><br><br>
+        <h6 align="center" style="color: brown">Выход</h6>
+      </a>
+      
